@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body {
+    @apply bg-ink-900 text-mist-100 overflow-x-hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    /* Offset for the fixed navbar so #anchor jumps (reduced-motion path,
+       or any browser-native fallback) don't land flush under it. */
+    scroll-padding-top: 96px;
+  }
+
+  /* Premium scrollbar on desktop; mobile browsers ignore this and use
+     their own overlay scrollbar, so it never costs anything there. */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0e16;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5b8def, #2a4fd6);
+    border-radius: 8px;
+    border: 2px solid #0a0e16;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3d63e8 #0a0e16;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'ss01' on, 'ss02' on;
+  }
+
+  #root {
+    @apply overflow-x-hidden;
+  }
+
+  ::selection {
+    background: rgba(91, 141, 239, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7fb3ff;
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'Fraunces', serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-widest2 text-azure-400/80;
+  }
+
+  .glass {
+    background: rgba(15, 21, 32, 0.55);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .text-gradient-azure {
+    background: linear-gradient(180deg, #f6f8fb 0%, #a9cbff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-blueprint {
+    background-image: linear-gradient(rgba(127, 179, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127, 179, 255, 0.055) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+/* Reduced motion: neutralize scroll smoothing and long transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Lenis smooth scroll helper classes */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
